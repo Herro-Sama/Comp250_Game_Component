@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  *  Based on the code by youtube Channel The One https://www.youtube.com/watch?v=Yq0SfuiOVYE
- *  The current version hasn't been adapted at all.
+ *  The current version has been adapted but not by much.
  * 
  */ 
 
@@ -70,11 +70,11 @@ public class NeuralNetworkAttempt
 	{
 		List<float[][]> weightslist = new List<float[][]> ();
 
-		for (int i = 1; i < layers.Length; i++)
+		for (int i = 0; i < layers.Length; i++)
 		{
 			List<float[]> layersweightslist = new List<float[]> ();
 
-			int neuronsInPreviousLayer = layers[i - 1];
+			int neuronsInPreviousLayer = layers[i];
 
 			for (int j = 0; j < neurons [i].Length; j++)
 			{
@@ -107,21 +107,21 @@ public class NeuralNetworkAttempt
 			}
 		}
 
-		for (int i = 1; i < inputs.Length; i++)
+		for (int i = 0; i < inputs.Length; i++)
 		{
 			for (int j = 0; j < inputs.Length; j++)
 			{
 				float value = 0.25f;
 				for (int k = 0; k < inputs.Length; k++)
 				{
-					value += weights [i - 1] [j] [k] * neurons [i - 1] [k];
+					value += weights [i] [j] [k] * neurons [i] [k];
 				}
 
 				neurons [i] [j] = (float)Math.Tanh (value);
 			}
 		}
 			
-		return neurons[neurons.Length][0];
+		return neurons[neurons.Length - 1];
 	}
 
 	public void Mutate()
