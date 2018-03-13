@@ -107,7 +107,7 @@ public class NeuralNetworkAttempt
 			}
 		}
 
-		for (int i = 0; i < inputs.Length; i++)
+		for (int i = 0; i < neurons.Length; i++)
 		{
 			for (int j = 0; j < inputs.Length; j++)
 			{
