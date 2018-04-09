@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour {
 
-	private int[] layers = new int[] { 3, 8, 8, 3 };
+	private int[] layers = new int[] { 900, 8, 8, 3 };
 	private float[] networkGuess = new float[] {0,0,0};
 	NeuralNetworkAttempt Network;
-	private string guessString;
+
+    private bool playerFirstGuess;
 
 	void Start()
 	{
@@ -16,6 +17,19 @@ public class Manager : MonoBehaviour {
 		Network.Mutate();
 	}
 
+    public void FitnessRating(bool CorrectAnswer)
+    {
+        if (CorrectAnswer == true)
+        {
+            return;
+        }
+        else
+        {
+            Network.Mutate();
+        }
+    }
+
+
 	// Update is called once per frame
 	public void DoNeuralNetworking(float[] PlayerChoice) 
 	{
@@ -23,21 +37,27 @@ public class Manager : MonoBehaviour {
 		print ("Part one - " + networkGuess [0]);
 		print ("Part Two - " + networkGuess [1]);
 		print ("Part Three - " + networkGuess [2]);
+        playerFirstGuess = true;
 	}
 
 	public string GetNetworkGuessString()
 	{
-		if (networkGuess != null)
+		if (networkGuess != null && playerFirstGuess != false)
 		{
-			if (networkGuess[0] == 1)
+			if (networkGuess[0] > networkGuess[1])
 			{
-				return "Rock";
-			}
-			if (networkGuess[1] == 1)
+                if (networkGuess[0] > networkGuess[2])
+                {
+                    return "Rock";
+                }
+                return "Scissors";
+
+            }
+			if (networkGuess[1] > networkGuess[2])
 			{
 				return "Paper";
 			}
-			if (networkGuess [2] == 1)
+			else
 			{
 				return "Scissors";
 			}

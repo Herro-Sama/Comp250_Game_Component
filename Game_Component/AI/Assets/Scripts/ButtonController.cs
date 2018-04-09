@@ -30,4 +30,9 @@ public class ButtonController : MonoBehaviour {
 		playerGuess [2] = 1;
 		ManagerRef.GetComponent<Manager>().DoNeuralNetworking(playerGuess);
 	}
+
+    public void WrongPicked()
+    {
+        ManagerRef.GetComponent<Manager>().FitnessRating(false);
+    }
 }
