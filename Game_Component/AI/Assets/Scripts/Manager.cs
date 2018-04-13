@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour {
 
-	private int[] layers = new int[] { 900, 8, 8, 3 };
+	private int[] layers = new int[] { 900, 300, 16, 3 };
 	private float[] networkGuess = new float[] {0,0,0};
 	NeuralNetworkAttempt Network;
 

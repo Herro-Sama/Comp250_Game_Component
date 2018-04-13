@@ -109,10 +109,10 @@ public class NeuralNetworkAttempt
 
 		for (int i = 0; i < neurons.Length; i++)
 		{
-			for (int j = 0; j < inputs.Length; j++)
+			for (int j = 0; j < neurons[i].Length; j++)
 			{
 				float value = 0.25f;
-				for (int k = 0; k < inputs.Length; k++)
+				for (int k = 0; k < weights[i][j].Length; k++)
 				{
 					value += weights [i] [j] [k] * neurons [i] [k];
 				}
