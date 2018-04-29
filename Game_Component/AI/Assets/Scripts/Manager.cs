@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour {
 
+    /*
+     * This script is used to create and store the network, it's also used to manage the network and relay information to other scripts so nothing else touchs the neural network. 
+     */
+
 	private int[] layers = new int[] { 900, 300, 16, 3 };
 	private float[] networkGuess = new float[] {0,0,0};
 	NeuralNetworkAttempt Network;
 
     private bool playerFirstGuess;
 
-	void Start()
+    // On Start up create the network.
+    void Start()
 	{
 		Network = new NeuralNetworkAttempt (layers);
 		layers [0] += 3;
 		Network.Mutate();
 	}
 
+    // Make the network mutate.
     public void FitnessRating(bool CorrectAnswer)
     {
         if (CorrectAnswer == true)
@@ -29,17 +35,25 @@ public class Manager : MonoBehaviour {
         }
     }
 
+    // Used by the DisplayNeuralOutput script.
+    public float[] GetNetworkGuessFloat()
+    {
+        if (playerFirstGuess != false)
+        {
+            return networkGuess;
+        }
+        return new float[] {0,0,0};
+    }
 
-	// Update is called once per frame
+
+	// This is used when the player makes a guess.
 	public void DoNeuralNetworking(float[] PlayerChoice) 
 	{
 		networkGuess = Network.FeedForward(PlayerChoice);
-		print ("Part one - " + networkGuess [0]);
-		print ("Part Two - " + networkGuess [1]);
-		print ("Part Three - " + networkGuess [2]);
         playerFirstGuess = true;
 	}
 
+    // This returns a string based on which of the outputs is highest.
 	public string GetNetworkGuessString()
 	{
 		if (networkGuess != null && playerFirstGuess != false)

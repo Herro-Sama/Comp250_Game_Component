@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour {
 
+    // This script controls the buttons sending various information to the Manager script.
+
 	public GameObject ManagerRef;
 	private float[] playerGuess = new float[3] {0,0,0};
 
+    // Choice for rock.
 	public void RockPicked()
 	{
 		playerGuess [0] = 1;
@@ -15,7 +18,8 @@ public class ButtonController : MonoBehaviour {
 		ManagerRef.GetComponent<Manager>().DoNeuralNetworking(playerGuess);
 	}
 
-	public void PaperPicked()
+    // Choice for paper.
+    public void PaperPicked()
 	{
 		playerGuess [0] = 0;
 		playerGuess [1] = 1;
@@ -23,7 +27,8 @@ public class ButtonController : MonoBehaviour {
 		ManagerRef.GetComponent<Manager>().DoNeuralNetworking(playerGuess);
 	}
 
-	public void ScissorsPicked()
+    // Choice for Scissors.
+    public void ScissorsPicked()
 	{
 		playerGuess [0] = 0;
 		playerGuess [1] = 0;
@@ -31,6 +36,7 @@ public class ButtonController : MonoBehaviour {
 		ManagerRef.GetComponent<Manager>().DoNeuralNetworking(playerGuess);
 	}
 
+    // Tell the manager that the guess was wrong and to mutate.
     public void WrongPicked()
     {
         ManagerRef.GetComponent<Manager>().FitnessRating(false);
